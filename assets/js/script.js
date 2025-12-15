@@ -106,6 +106,31 @@ const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
 
+// handle form submit
+form.addEventListener("submit", function (e) {
+  e.preventDefault(); // stop page refresh
+
+  // validate form
+  if (!form.checkValidity()) {
+    alert("Please fill all fields before submitting.");
+    return;
+  }
+
+  // show success message
+  const successMsg = document.querySelector("[data-form-success]");
+  successMsg.style.display = "block";
+
+  // reset form
+  form.reset();
+  formBtn.setAttribute("disabled", "");
+
+  // hide message after 3 seconds (optional)
+  setTimeout(() => {
+    successMsg.style.display = "none";
+  }, 3000);
+});
+
+
 // add event to all form input field
 for (let i = 0; i < formInputs.length; i++) {
   formInputs[i].addEventListener("input", function () {
