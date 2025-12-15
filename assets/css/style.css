@@ -2268,3 +2268,93 @@ textarea.form-input::-webkit-resizer {
     max-width: 700px;
   }
 }
+
+
+/* ================================
+   EXPERIENCE & EDUCATION ENHANCEMENT
+================================ */
+
+/* Timeline container spacing */
+.timeline-list {
+  margin-top: 30px;
+}
+
+/* Timeline item card look */
+.timeline-item {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  padding: 20px 25px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 211, 105, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover effect */
+.timeline-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(255, 211, 105, 0.15);
+}
+
+/* Company / Institute name */
+.timeline-item-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--white-2);
+  margin-bottom: 6px;
+}
+
+/* Role + duration */
+.timeline-item span {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--orange-yellow-crayola);
+  margin-bottom: 14px;
+}
+
+/* Description text */
+.timeline-text {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--light-gray);
+}
+
+/* Improve bullet spacing */
+.timeline-text br {
+  content: "";
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Timeline vertical line refinement */
+.timeline-item::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 211, 105, 0.8),
+    rgba(255, 211, 105, 0.05)
+  );
+}
+
+/* Timeline dot glow */
+.timeline-item::after {
+  box-shadow:
+    0 0 0 4px var(--jet),
+    0 0 12px rgba(255, 211, 105, 0.8);
+}
+
+/* Section titles (Experience / Education) */
+.timeline .title-wrapper h3 {
+  letter-spacing: 0.5px;
+}
+
+/* Education distinction (slightly calmer) */
+.timeline:last-of-type .timeline-item {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+
+
