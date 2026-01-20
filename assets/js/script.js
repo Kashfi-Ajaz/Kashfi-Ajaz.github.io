@@ -106,8 +106,11 @@ const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
 
+// Replace 'YOUR_SCRIPT_URL' with the actual Google Apps Script web app URL
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMca4Fjlg3n5v0w5d026YsUK20WA85svMGh9VeRgz1oMMSH1-1uzMy6wej4uF5Aitb/exec';
+
 // handle form submit
-form.addEventListener("submit", function (e) {
+form.addEventListener("submit", async function (e) {
   e.preventDefault(); // stop page refresh
 
   // validate form
@@ -116,18 +119,52 @@ form.addEventListener("submit", function (e) {
     return;
   }
 
-  // show success message
-  const successMsg = document.querySelector("[data-form-success]");
-  successMsg.style.display = "block";
-
-  // reset form
-  form.reset();
+  // Disable button and show loading
   formBtn.setAttribute("disabled", "");
+  formBtn.classList.add("sending");
+  formBtn.innerHTML = '<ion-icon name="hourglass"></ion-icon><span>Sending...</span>';
 
-  // hide message after 3 seconds (optional)
-  setTimeout(() => {
-    successMsg.style.display = "none";
-  }, 3000);
+  const formData = new FormData(form);
+  const data = {
+    fullname: formData.get('fullname'),
+    email: formData.get('email'),
+    message: formData.get('message')
+  };
+
+  try {
+    const response = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const result = await response.json();
+
+    if (result.status === 'success') {
+      // show success message
+      const successMsg = document.querySelector("[data-form-success]");
+      successMsg.style.display = "block";
+
+      // reset form
+      form.reset();
+
+      // hide message after 3 seconds
+      setTimeout(() => {
+        successMsg.style.display = "none";
+      }, 3000);
+    } else {
+      alert('Error: ' + result.message);
+    }
+  } catch (error) {
+    alert('Error submitting form: ' + error.message);
+  } finally {
+    // Re-enable button and reset text
+    formBtn.removeAttribute("disabled");
+    formBtn.classList.remove("sending");
+    formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
+  }
 });
 
 

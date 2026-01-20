@@ -1444,6 +1444,14 @@ textarea.form-input::-webkit-resizer {
   background: var(--bg-gradient-jet);
 }
 
+.form-btn.sending {
+  /* Ensure alignment during sending state */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
 .form-success {
   margin-top: 20px;
   padding: 14px 18px;
